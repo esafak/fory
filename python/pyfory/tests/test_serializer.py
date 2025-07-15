@@ -470,14 +470,18 @@ def test_pickle_fallback():
 def helper_f1(x):
     return x
 
+
 def helper_f2(x):
     return x + x
+
 
 def helper_double(x):
     return x * 2
 
+
 def helper_multiply(x):
     return x * 2
+
 
 def test_unsupported_callback():
     """
@@ -501,6 +505,7 @@ def test_unsupported_callback():
 
     # Create a closure that captures a variable from the outer scope
     outer_value = 42
+
     def closure_function(x):
         return x + outer_value
 
@@ -508,12 +513,12 @@ def test_unsupported_callback():
     obj1 = [
         1,
         True,
-        helper_f1,           # Global function
-        helper_f2,           # Another global function
-        local_function,      # Local function
-        lambda_function,     # Lambda function
-        closure_function,    # Function with closure
-        {1: 2}
+        helper_f1,  # Global function
+        helper_f2,  # Another global function
+        local_function,  # Local function
+        lambda_function,  # Lambda function
+        closure_function,  # Function with closure
+        {1: 2},
     ]
 
     # Create an empty list for unsupported objects - we won't need to use it
@@ -535,11 +540,11 @@ def test_unsupported_callback():
 
     # Verify all functions have the same behavior
     test_input = 5
-    assert new_obj1[2](test_input) == helper_f1(test_input)      # helper_f1(5) = 5
-    assert new_obj1[3](test_input) == helper_f2(test_input)      # helper_f2(5) = 10
-    assert new_obj1[4](test_input) == local_function(test_input) # local_function(5) = 15
-    assert new_obj1[5](test_input) == lambda_function(test_input) # lambda_function(5) = 15
-    assert new_obj1[6](test_input) == closure_function(test_input) # closure_function(5) = 47
+    assert new_obj1[2](test_input) == helper_f1(test_input)  # helper_f1(5) = 5
+    assert new_obj1[3](test_input) == helper_f2(test_input)  # helper_f2(5) = 10
+    assert new_obj1[4](test_input) == local_function(test_input)  # local_function(5) = 15
+    assert new_obj1[5](test_input) == lambda_function(test_input)  # lambda_function(5) = 15
+    assert new_obj1[6](test_input) == closure_function(test_input)  # closure_function(5) = 47
 
     # Verify the dictionary
     assert new_obj1[7] == obj1[7]  # {1: 2}
