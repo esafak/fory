@@ -84,7 +84,7 @@ def run_shell_script(command, *args):
             cmd = [bash_path, script_path, command]
             cmd.extend(args)
             logging.info(f"Falling back to shell script with bash: {' '.join(cmd)}")
-            return subprocess.call(cmd)
+            sys.exit(subprocess.call(cmd))
         else:
             logging.error(
                 "Bash is not available on this Windows system. Cannot run shell script."
@@ -101,7 +101,7 @@ def run_shell_script(command, *args):
         cmd = [script_path, command]
         cmd.extend(args)
         logging.info(f"Falling back to shell script: {' '.join(cmd)}")
-        return subprocess.call(cmd)
+        sys.exit(subprocess.call(cmd))
 
 
 def parse_args():
