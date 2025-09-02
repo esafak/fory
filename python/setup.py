@@ -37,6 +37,7 @@ project_dir = abspath(pjoin(setup_dir, os.pardir))
 fory_cpp_src_dir = abspath(pjoin(setup_dir, "../src/"))
 
 print(f"setup_dir: {setup_dir}")
+print(f"project_dir: {project_dir}")
 print(f"fory_cpp_src_dir: {fory_cpp_src_dir}")
 
 
@@ -51,7 +52,10 @@ class BinaryDistribution(Distribution):
             elif arch in ("aarch64", "arm64"):
                 bazel_args += ["--copt=-fsigned-char"]
             bazel_args += ["//:cp_fory_so"]
-            subprocess.check_call(bazel_args, cwd=project_dir)
+            # Ensure Windows path compatibility
+            cwd_path = os.path.normpath(project_dir)
+            print(f"Running bazel with cwd={cwd_path}: {' '.join(bazel_args)}")
+            subprocess.check_call(bazel_args, cwd=cwd_path)
 
     def has_ext_modules(self):
         return True
