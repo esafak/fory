@@ -270,7 +270,7 @@ def run_graalvm_test():
     logging.info("Start GraalVM tests")
 
     common.cd_project_subdir("java")
-    common.exec_cmd("mvn -T10 -B --no-transfer-progress clean install -DskipTests")
+    common.exec_cmd("mvn -T10 -B --no-transfer-progress clean install -DskipTests -pl '!:fory-format'")
 
     logging.info("Start to build graalvm native image")
     common.cd_project_subdir("integration_tests/graalvm_tests")
