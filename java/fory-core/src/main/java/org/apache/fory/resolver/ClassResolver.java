@@ -37,6 +37,7 @@ import com.google.common.collect.HashBiMap;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.invoke.SerializedLambda;
 import java.lang.reflect.Field;
 import java.lang.reflect.Member;
 import java.lang.reflect.Type;
@@ -422,6 +423,7 @@ public class ClassResolver implements TypeResolver {
     register(AtomicReference.class);
     register(EnumSet.allOf(Language.class).getClass());
     register(EnumSet.of(Language.JAVA).getClass());
+    register(SerializedLambda.class);
     register(Throwable.class, StackTraceElement.class, Exception.class, RuntimeException.class);
     register(NullPointerException.class);
     register(IOException.class);
