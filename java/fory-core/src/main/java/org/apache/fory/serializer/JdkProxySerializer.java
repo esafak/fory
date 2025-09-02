@@ -52,7 +52,7 @@ public class JdkProxySerializer extends Serializer {
   private static final InvocationHandler STUB_HANDLER = new StubInvocationHandler();
 
   private interface StubInterface {
-    int f();
+    int apply();
   }
 
   public static Object SUBT_PROXY =
