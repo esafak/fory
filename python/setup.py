@@ -54,7 +54,12 @@ class BinaryDistribution(Distribution):
             bazel_args += ["//:cp_fory_so"]
             # Ensure Windows path compatibility
             cwd_path = os.path.normpath(project_dir)
-            print(f"Running bazel with cwd={cwd_path}: {' '.join(bazel_args)}")
+            # Force Bazel to run a sync first to ensure repositories are loaded
+            sync_args = ["bazel", "sync", "--configure"]
+            print(f"Running bazel sync with cwd={cwd_path}: {' '.join(sync_args)}")
+            subprocess.check_call(sync_args, cwd=cwd_path)
+            
+            print(f"Running bazel build with cwd={cwd_path}: {' '.join(bazel_args)}")
             subprocess.check_call(bazel_args, cwd=cwd_path)
 
     def has_ext_modules(self):
