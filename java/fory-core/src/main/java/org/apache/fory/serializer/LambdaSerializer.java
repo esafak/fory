@@ -89,8 +89,9 @@ public class LambdaSerializer extends Serializer {
               lookup.unreflect(
                   (java.lang.reflect.Method) Objects.requireNonNull(writeReplaceMethod));
           writeReplaceMethodCache.put(cls, methodHandle);
-        } catch (IllegalAccessException e) {
-          throw new RuntimeException("Failed to create writeReplace MethodHandle", e);
+        } catch (Throwable e) {
+          throw new RuntimeException(
+              String.format("Failed to create writeReplace MethodHandle for %s", cls), e);
         }
       }
       writeReplaceHandle = methodHandle;
