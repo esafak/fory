@@ -46,9 +46,8 @@ public class JdkProxySerializer extends Serializer {
       (proxy, method, args) -> {
         throw new IllegalStateException("Deserialization stub handler still active");
       };
-  public static Object SUBT_PROXY =
-      Proxy.newProxyInstance(
-          Serializer.class.getClassLoader(), new Class[] {Function.class}, STUB_HANDLER);
+  public static Class<?> SUBT_PROXY_CLASS =
+      Proxy.getProxyClass(Serializer.class.getClassLoader(), Function.class);
 
   public JdkProxySerializer(Fory fory, Class cls) {
     super(fory, cls);
