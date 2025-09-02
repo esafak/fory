@@ -50,7 +50,7 @@ class BinaryDistribution(Distribution):
             elif arch in ("aarch64", "arm64"):
                 bazel_args += ["--copt=-fsigned-char"]
             bazel_args += ["//:cp_fory_so"]
-            subprocess.check_call(bazel_args)
+            subprocess.check_call(bazel_args, cwd=project_dir)
 
     def has_ext_modules(self):
         return True
