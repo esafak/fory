@@ -168,7 +168,6 @@ import org.apache.fory.util.GraalvmSupport.GraalvmSerializerHolder;
 import org.apache.fory.util.Preconditions;
 import org.apache.fory.util.StringUtils;
 import org.apache.fory.util.function.Functions;
-import org.apache.fory.util.function.SerializableFunction;
 
 /**
  * Class registry for types of serializing objects, responsible for reading/writing types, setting
@@ -2226,8 +2225,7 @@ public class ClassResolver implements TypeResolver {
   public void ensureSerializersCompiled() {
     try {
       fory.getJITContext().lock();
-      SerializableFunction<Integer, Integer> lambda = x -> x * 2;
-      Serializers.newSerializer(fory, lambda.getClass(), LambdaSerializer.class);
+      Serializers.newSerializer(fory, LambdaSerializer.STUB_LAMBDA_CLASS, LambdaSerializer.class);
       classInfoMap.forEach(
           (cls, classInfo) -> {
             if (classInfo.serializer == null) {
