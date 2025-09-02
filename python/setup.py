@@ -54,15 +54,6 @@ class BinaryDistribution(Distribution):
             bazel_args += ["//:cp_fory_so"]
             # Ensure Windows path compatibility
             cwd_path = os.path.normpath(project_dir)
-            # Force repository fetching by running fetch for our specific target
-            fetch_args = ["bazel", "fetch", "//:cp_fory_so"]
-            try:
-                print(f"Running bazel fetch to load repositories with cwd={cwd_path}")
-                subprocess.check_call(fetch_args, cwd=cwd_path)
-            except subprocess.CalledProcessError:
-                # If fetch fails, continue anyway as build might still work
-                pass
-            print(f"Running bazel build with cwd={cwd_path}: {' '.join(bazel_args)}")
             subprocess.check_call(bazel_args, cwd=cwd_path)
 
     def has_ext_modules(self):

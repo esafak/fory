@@ -345,7 +345,7 @@ class Fory:
         buffers: Iterable = None,
         unsupported_objects: Iterable = None,
     ):
-        if type(buffer) == bytes:
+        if isinstance(buffer, bytes):
             buffer = Buffer(buffer)
         if unsupported_objects is not None:
             self._unsupported_objects = iter(unsupported_objects)
