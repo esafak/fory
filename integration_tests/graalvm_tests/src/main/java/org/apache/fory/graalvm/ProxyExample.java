@@ -36,6 +36,11 @@ public class ProxyExample {
     }
   }
 
+  static Function function =
+        (Function)
+            Proxy.newProxyInstance(
+                TestInvocationHandler.class.getClassLoader(), new Class[] {Function.class}, new TestInvocationHandler());
+
   static Fory fory;
 
   static {
@@ -55,10 +60,7 @@ public class ProxyExample {
   }
 
   public static void main(String[] args) {
-    Function function =
-        (Function)
-            Proxy.newProxyInstance(
-                fory.getClassLoader(), new Class[] {Function.class}, new TestInvocationHandler());
+    
     Function deserializedFunction = (Function) fory.deserialize(fory.serialize(function));
     Preconditions.checkArgument(deserializedFunction.apply(null).equals(1));
     fory = createFory();
