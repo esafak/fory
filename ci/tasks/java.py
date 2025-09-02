@@ -149,7 +149,7 @@ def run_java8():
     logging.info("Executing fory java tests with Java 8")
     install_jdks()
     common.cd_project_subdir("java")
-    common.exec_cmd("mvn -T16 --batch-mode --no-transfer-progress test -pl '!:fory-format'")
+    common.exec_cmd("mvn -T16 --batch-mode --no-transfer-progress test -pl '!:fory-format,!:fory-testsuite'")
     logging.info("Executing fory java tests succeeds")
 
 
@@ -208,7 +208,7 @@ def run_integration_tests():
     logging.info("Executing fory integration tests")
 
     common.cd_project_subdir("java")
-    common.exec_cmd("mvn -T10 -B --no-transfer-progress clean install -DskipTests -pl '!:fory-format'")
+    common.exec_cmd("mvn -T10 -B --no-transfer-progress clean install -DskipTests -pl '!:fory-format,!:fory-testsuite'")
 
     logging.info("benchmark tests")
     common.cd_project_subdir("java/benchmark")
@@ -270,7 +270,7 @@ def run_graalvm_test():
     logging.info("Start GraalVM tests")
 
     common.cd_project_subdir("java")
-    common.exec_cmd("mvn -T10 -B --no-transfer-progress clean install -DskipTests -pl '!:fory-format'")
+    common.exec_cmd("mvn -T10 -B --no-transfer-progress clean install -DskipTests -pl '!:fory-format,!:fory-testsuite'")
 
     logging.info("Start to build graalvm native image")
     common.cd_project_subdir("integration_tests/graalvm_tests")
