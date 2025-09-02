@@ -208,7 +208,7 @@ def run_integration_tests():
     logging.info("Executing fory integration tests")
 
     common.cd_project_subdir("java")
-    common.exec_cmd("mvn -T10 -B --no-transfer-progress clean install -DskipTests")
+    common.exec_cmd("mvn -T10 -B --no-transfer-progress clean install -DskipTests -pl '!:fory-format'")
 
     logging.info("benchmark tests")
     common.cd_project_subdir("java/benchmark")
