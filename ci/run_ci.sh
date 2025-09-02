@@ -153,7 +153,7 @@ graalvm_test() {
 
 integration_tests() {
   cd "$ROOT"/java
-  mvn -T10 -B --no-transfer-progress clean install -DskipTests -pl '!:fory-format,!:fory-testsuite'
+  mvn -T10 -B --no-transfer-progress clean install -DskipTests
   echo "benchmark tests"
   cd "$ROOT"/java/benchmark
   mvn -T10 -B --no-transfer-progress clean test install -Pjmh
