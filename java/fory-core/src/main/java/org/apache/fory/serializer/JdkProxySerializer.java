@@ -21,8 +21,8 @@ package org.apache.fory.serializer;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.function.Function;
 import org.apache.fory.Fory;
 import org.apache.fory.memory.MemoryBuffer;
 import org.apache.fory.memory.Platform;
@@ -42,12 +42,22 @@ public class JdkProxySerializer extends Serializer {
     PROXY_HANDLER_FIELD_OFFSET = Platform.objectFieldOffset(FIELD);
   }
 
-  private static final InvocationHandler STUB_HANDLER =
-      (proxy, method, args) -> {
-        throw new IllegalStateException("Deserialization stub handler still active");
-      };
-  public static Class<?> SUBT_PROXY_CLASS =
-      Proxy.getProxyClass(Serializer.class.getClassLoader(), Function.class);
+  private static class StubInvocationHandler implements InvocationHandler {
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+      throw new IllegalStateException("Deserialization stub handler still active");
+    }
+  }
+
+  private static final InvocationHandler STUB_HANDLER = new StubInvocationHandler();
+
+  private interface StubInterface {
+    int f();
+  }
+
+  public static Object SUBT_PROXY =
+      Proxy.newProxyInstance(
+          Serializer.class.getClassLoader(), new Class[] {StubInterface.class}, STUB_HANDLER);
 
   public JdkProxySerializer(Fory fory, Class cls) {
     super(fory, cls);
