@@ -2225,6 +2225,8 @@ public class ClassResolver implements TypeResolver {
   public void ensureSerializersCompiled() {
     try {
       fory.getJITContext().lock();
+      Function<Integer, Integer> lambda = x -> x * 2;
+      Serializers.newSerializer(fory, lambda.getClass(), LambdaSerializer.class);
       classInfoMap.forEach(
           (cls, classInfo) -> {
             if (classInfo.serializer == null) {
