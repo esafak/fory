@@ -22,6 +22,7 @@ package org.apache.fory.serializer;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
+import java.util.function.Function;
 import org.apache.fory.Fory;
 import org.apache.fory.memory.MemoryBuffer;
 import org.apache.fory.memory.Platform;
@@ -32,7 +33,6 @@ import org.apache.fory.util.Preconditions;
 /** Serializer for jdk {@link Proxy}. */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class JdkProxySerializer extends Serializer {
-
   // Make offset compatible with graalvm native image.
   private static final Field FIELD;
   private static final long PROXY_HANDLER_FIELD_OFFSET;
@@ -46,6 +46,9 @@ public class JdkProxySerializer extends Serializer {
       (proxy, method, args) -> {
         throw new IllegalStateException("Deserialization stub handler still active");
       };
+  public static Object SUBT_PROXY =
+      Proxy.newProxyInstance(
+          Serializer.class.getClassLoader(), new Class[] {Function.class}, STUB_HANDLER);
 
   public JdkProxySerializer(Fory fory, Class cls) {
     super(fory, cls);

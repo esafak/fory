@@ -2228,6 +2228,8 @@ public class ClassResolver implements TypeResolver {
     try {
       fory.getJITContext().lock();
       Serializers.newSerializer(fory, LambdaSerializer.STUB_LAMBDA_CLASS, LambdaSerializer.class);
+      Serializers.newSerializer(
+          fory, JdkProxySerializer.SUBT_PROXY.getClass(), JdkProxySerializer.class);
       classInfoMap.forEach(
           (cls, classInfo) -> {
             if (classInfo.serializer == null) {
