@@ -237,14 +237,13 @@ def parse_args():
         if USE_PYTHON_JAVA:
             func(**arg_dict)
         else:
-            
             if not arg_dict.get("version"):
                 func(**arg_dict)
                 return
             # Map Python version argument to shell script command
             version = arg_dict.get("version", "17")
             release = arg_dict.get("release", False)
-            
+
             if release:
                 logging.info("Release mode requested - using Python implementation")
                 func(**arg_dict)

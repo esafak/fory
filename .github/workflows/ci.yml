@@ -62,6 +62,8 @@ jobs:
         run: python ./ci/run_ci.py cpp --install-deps-only
       - name: Install python dependencies
         run: pip install pyarrow==15.0.0 Cython wheel pytest setuptools -U
+      - name: Install pyfory for xlang tests
+        run: pip install -e python/
       - name: Run CI with Maven
         run: python ./ci/run_ci.py java --version ${{ matrix.java-version }}
       - name: Upload Test Report
@@ -93,6 +95,8 @@ jobs:
           python-version: 3.8
       - name: Install bazel
         run: python ./ci/run_ci.py cpp --install-deps-only
+      - name: Install pyfory for xlang tests
+        run: pip install -e python/
       - name: Install python dependencies
         run: pip install pyarrow==15.0.0 Cython wheel pytest setuptools -U
       - name: Run CI with Maven
@@ -303,7 +307,7 @@ jobs:
         run: python ./ci/run_ci.py cpp --install-deps-only
       - name: Install python dependencies
         run: pip install pyarrow==15.0.0 cython wheel pytest setuptools -U
-      - name: Install pyfory
+      - name: Install pyfory for xlang tests
         run: pip install -e python/
       - name: Run Golang CI
         run: python ./ci/run_ci.py go

@@ -39,6 +39,7 @@ fory_cpp_src_dir = abspath(pjoin(setup_dir, "../src/"))
 print(f"setup_dir: {setup_dir}")
 print(f"fory_cpp_src_dir: {fory_cpp_src_dir}")
 
+
 class BinaryDistribution(Distribution):
     def __init__(self, attrs=None):
         super().__init__(attrs=attrs)
