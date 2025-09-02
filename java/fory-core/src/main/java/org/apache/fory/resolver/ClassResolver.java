@@ -972,14 +972,14 @@ public class ClassResolver implements TypeResolver {
         return CollectionSerializers.EnumSetSerializer.class;
       } else if (Charset.class.isAssignableFrom(cls)) {
         return Serializers.CharsetSerializer.class;
-      } else if (Functions.isLambda(cls)) {
-        return LambdaSerializer.class;
       } else if (ReflectionUtils.isJdkProxy(cls)) {
         if (JavaSerializer.getWriteReplaceMethod(cls) != null) {
           return ReplaceResolveSerializer.class;
         } else {
           return JdkProxySerializer.class;
         }
+      } else if (Functions.isLambda(cls)) {
+        return LambdaSerializer.class;
       } else if (Calendar.class.isAssignableFrom(cls)) {
         return TimeSerializers.CalendarSerializer.class;
       } else if (ZoneId.class.isAssignableFrom(cls)) {
