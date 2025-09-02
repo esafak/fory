@@ -379,6 +379,9 @@ class TypeResolver:
         serializer: Serializer = None,
         internal: bool = False,
     ):
+        # Set default type_id when None, similar to _register_xtype
+        if type_id is None and typename is not None:
+            type_id = self._next_type_id()
         return self.__register_type(
             cls,
             type_id=type_id,
@@ -398,7 +401,7 @@ class TypeResolver:
         serializer: Serializer = None,
         internal: bool = False,
     ):
-        dynamic_type = type_id < 0
+        dynamic_type = type_id is not None and type_id < 0
         if not internal and serializer is None:
             serializer = self._create_serializer(cls)
         if typename is None:
