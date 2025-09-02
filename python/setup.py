@@ -55,7 +55,7 @@ class BinaryDistribution(Distribution):
             # Ensure Windows path compatibility
             cwd_path = os.path.normpath(project_dir)
             # Force Bazel to run a sync first to ensure repositories are loaded
-            sync_args = ["bazel", "sync", "--configure"]
+            sync_args = ["bazel", "sync", "--configure", "--enable_workspace"]
             print(f"Running bazel sync with cwd={cwd_path}: {' '.join(sync_args)}")
             subprocess.check_call(sync_args, cwd=cwd_path)
             
