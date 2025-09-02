@@ -166,7 +166,7 @@ class Fory:
         self._unsupported_callback = None
         self._unsupported_objects = None
         self._peer_language = None
-    
+
     def register(
         self,
         cls: Union[type, TypeVar],
@@ -544,8 +544,8 @@ class _PicklerStub:
     def dump(self, o):
         raise ValueError(
             f"Type {type(o)} is not registered, "
-            f"pickle is not allowed when type registration enabled, Please register"
-            f"the type or pass unsupported_callback"
+            f"pickle is not allowed when type registration enabled, "
+            f"Please register the type or pass unsupported_callback"
         )
 
     def clear_memo(self):
@@ -555,6 +555,6 @@ class _PicklerStub:
 class _UnpicklerStub:
     def load(self):
         raise ValueError(
-            "pickle is not allowed when type registration enabled, Please register"
-            "the type or pass unsupported_callback"
+            "pickle is not allowed when type registration enabled, "
+            "Please register the type or pass unsupported_callback"
         )
