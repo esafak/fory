@@ -486,9 +486,9 @@ def test_unsupported_callback():
     # Functions should roundtrip correctly
     assert len(new_obj1) == len(obj1)
     assert new_obj1[0] == obj1[0]  # 1
-    assert new_obj1[1] == obj1[1]  # True 
+    assert new_obj1[1] == obj1[1]  # True
     assert new_obj1[2](5) == f1(5)  # Test f1 functionality
-    assert new_obj1[3](5) == f2(5)  # Test f2 functionality  
+    assert new_obj1[3](5) == f2(5)  # Test f2 functionality
     assert new_obj1[4] == obj1[4]  # {1: 2}
     # Don't check full equality since functions are new objects after deserialization
     # The functionality test above already confirmed they work correctly
