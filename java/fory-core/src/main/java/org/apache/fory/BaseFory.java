@@ -24,6 +24,7 @@ import java.util.function.Function;
 import org.apache.fory.io.ForyInputStream;
 import org.apache.fory.io.ForyReadableChannel;
 import org.apache.fory.memory.MemoryBuffer;
+import org.apache.fory.resolver.ClassResolver;
 import org.apache.fory.serializer.BufferCallback;
 import org.apache.fory.serializer.Serializer;
 import org.apache.fory.serializer.SerializerFactory;
@@ -222,4 +223,7 @@ public interface BaseFory {
 
   /** Deep copy the <code>obj</code>. */
   <T> T copy(T obj);
+
+  /** Get class resolver for current fory instance. */
+  ClassResolver getClassResolver();
 }

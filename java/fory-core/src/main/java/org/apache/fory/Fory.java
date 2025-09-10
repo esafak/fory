@@ -1628,6 +1628,7 @@ public final class Fory implements BaseFory {
     return refResolver;
   }
 
+  @Override
   public ClassResolver getClassResolver() {
     return classResolver;
   }

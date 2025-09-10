@@ -22,6 +22,7 @@ package org.apache.fory;
 import java.nio.ByteBuffer;
 import java.util.function.Function;
 import org.apache.fory.resolver.ClassChecker;
+import org.apache.fory.resolver.ClassResolver;
 import org.apache.fory.serializer.SerializerFactory;
 import org.apache.fory.util.LoaderBinding;
 
@@ -89,4 +90,11 @@ public interface ThreadSafeFory extends BaseFory {
    * @see LoaderBinding#clearClassLoader(ClassLoader)
    */
   void clearClassLoader(ClassLoader loader);
+
+  /**
+   * Get class resolver for current fory instance of current thread. Note that for {@link
+   * ThreadSafeFory}, the returned {@link ClassResolver} is also thread-safe.
+   */
+  @Override
+  ClassResolver getClassResolver();
 }
